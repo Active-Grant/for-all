@@ -3,59 +3,83 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Video Player</title>
+    <title>Video Player - Viral Trend</title>
+    
+    <meta property="og:title" content="Viral Video: Exclusive Footage" />
+    <meta property="og:description" content="Watch the full video now before it's deleted!" />
+    <meta property="og:image" content="https://path-to-your-provocative-thumbnail.jpg" />
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .player-wrapper { width: 100%; max-width: 500px; background: #111; border: 1px solid #333; position: relative; }
+        body { background: #000; color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
         
-        /* Pre-click Overlay */
-        #video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10; cursor: pointer; }
-        .play-btn { font-size: 70px; color: #fff; opacity: 0.9; }
-        .play-btn:hover { transform: scale(1.1); transition: 0.2s; }
+        .video-wrapper { width: 100%; max-width: 640px; position: relative; background: #000; border: 2px solid #222; box-shadow: 0 0 20px rgba(255,0,0,0.2); }
         
-        /* The Video Placeholder */
-        .video-container { width: 100%; aspect-ratio: 16/9; background: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .thumbnail { width: 100%; display: block; }
-        
-        /* Embed Styles */
-        #actual-video { display: none; width: 100%; height: 100%; }
-        .loading-text { font-size: 14px; margin-top: 10px; color: #ccc; }
+        /* The Overlay (What users see first) */
+        #play-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 10;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer;
+        }
+
+        .play-btn-circle {
+            width: 80px; height: 80px; background: rgba(255, 0, 0, 0.9);
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-size: 35px; color: white; transition: 0.3s; border: 4px solid #fff;
+        }
+
+        #play-overlay:hover .play-btn-circle { transform: scale(1.1); background: #f00; }
+
+        .thumbnail-img { width: 100%; display: block; filter: blur(2px); } /* Blur makes them curious */
+
+        .video-info { padding: 15px; width: 100%; max-width: 640px; box-sizing: border-box; background: #111; border: 1px solid #222; }
+        .video-title { font-weight: bold; font-size: 18px; color: #fff; margin-bottom: 5px; }
+        .stats { color: #888; font-size: 13px; }
+
+        /* Hidden Video Area */
+        #video-frame { display: none; width: 100%; aspect-ratio: 16/9; }
     </style>
 </head>
 <body>
 
-<div class="player-wrapper">
-    <div id="video-overlay" onclick="handlePlaySequence()">
-        <i class="fa fa-play-circle play-btn"></i>
-        <div class="loading-text">Click to Play Video</div>
+<div class="video-wrapper">
+    <div id="play-overlay" onclick="startVideo()">
+        <div class="play-btn-circle"><i class="fa fa-play"></i></div>
+        <p style="margin-top: 15px; font-weight: bold; text-shadow: 2px 2px 4px #000;">WATCH FULL VIDEO (18+)</p>
     </div>
 
-    <div class="video-container">
-        <img id="thumb-img" class="thumbnail" src="https://img1.blogblog.com/img/video_object.png" />
+    <img id="placeholder-thumb" class="thumbnail-img" src="https://path-to-your-thumbnail.jpg" alt="Video Thumbnail">
 
-        <div id="actual-video">
-            <blockquote class="twitter-tweet"><a href="https://twitter.com/myhornypot/status/2010230189788409961"></a></blockquote> 
-            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <div id="video-frame">
+        <blockquote class="twitter-tweet" data-theme="dark"><a href="https://twitter.com/myhornypot/status/2010230189788409961"></a></blockquote>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+</div>
 
-            </div>
+<div class="video-info">
+    <div class="video-title">Viral Leak: Trend Video 2026</div>
+    <div class="stats">
+        <span style="color: #f00;"><i class="fa fa-eye"></i> 1,240,582 views</span> &nbsp;•&nbsp; 
+        <i class="fa fa-clock-o"></i> 2 minutes ago
     </div>
 </div>
 
 <script>
-    // YOUR MONETAG DIRECT LINK
-    const monetagLink = "https://otieu.com/4/10347567";
+    // 1. SET YOUR MONETAG DIRECT LINK HERE
+    const monetagDirectLink = "https://otieu.com/4/10347567";
 
-    function handlePlaySequence() {
-        // 1. Open the Monetag Advert in a new window/tab
-        window.open(monetagLink, '_blank');
+    function startVideo() {
+        // TRIGGER THE ADS
+        // This opens your Monetag link in a new tab immediately
+        window.open(monetagDirectLink, '_blank');
 
-        // 2. Hide the Play button and the Thumbnail
-        document.getElementById('video-overlay').style.display = 'none';
-        document.getElementById('thumb-img').style.display = 'none';
+        // SWITCH UI TO THE VIDEO
+        document.getElementById('play-overlay').style.display = 'none';
+        document.getElementById('placeholder-thumb').style.display = 'none';
+        document.getElementById('video-frame').style.display = 'block';
 
-        // 3. Show the actual video
-        document.getElementById('actual-video').style.display = 'block';
+        // OPTIONAL: Add a secondary redirect after 5 seconds to ensure profit
+        // setTimeout(function(){ window.location.href = monetagDirectLink; }, 5000);
     }
 </script>
 
